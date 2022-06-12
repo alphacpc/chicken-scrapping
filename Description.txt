@@ -1,0 +1,43 @@
+################################################
+############ Projet Web Scrapping ##############
+################################################
+
+#1 -- Service de scrapping : Comparateur de prix des poulets 
+    de chair en fonctions de la masse
+
+#2 -- Sites à scrapper : [ 
+        "https://guinarshop.com/shop/", 
+        "https://baayguins.com/product-category/poulets-frais/", 
+        "https://www.auchan.fr/boucherie-volaille-poissonnerie/volaille-lapin/poulet/ca-n020201"
+    ]
+
+#3 -- Vérifier si les sites acceptent le Web_Scrapping
+
+#4 -- Créer un Tableau dans Trello
+
+#5 -- Problématiques pas assez de sites qui vendent le poulet de chair
+
+#6 -- Outils & langues de travail : {
+        "python" : "BeautifulSoup",
+        "python" : "Scrapy",
+        "javascript" : "pupperteer"
+    }
+
+
+#7 -- Modélisation et Création de base de données 
+    {
+        "database" : "scrappingDB",
+        "tables" : ["site_web", "donnees"]
+        "description" : "Un site contient plusieurs information alors qu'une information vient d'un seul site"
+        "relationship" : "OneToMany"
+    }
+
+#8 -- Démarrer le projet
+
+#9 -- Ajouter les taches dans Trello
+
+#10 -- Installation des dépendances (NodeJS, Flask, SQLAlchemy, BeautifulSoup, Scrappy, pupperteer)
+
+#11 -- Philosophie du projet {
+        ""
+    }
