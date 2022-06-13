@@ -1,6 +1,11 @@
 import os
 import csv
+from flask import Flask, render_template
+from config.index import app
+from models.index import create_all_tables
 
+
+app = Flask(__name__)
 
 def reader_files(pathname):
     for (root, dirs, file) in os.walk(pathname):
@@ -16,9 +21,24 @@ def reader_files(pathname):
                         pass
                     
                     else:
-                        
+
                         print(row)
 
                     i += 1
 
-reader_files("/home/alpha/Projects/scrape-chicken/data")
+# reader_files("./data")
+
+
+@app.route('/', methods=["GET"])
+def home():
+    return render_template('pages/index.html')
+
+
+
+
+
+if __name__=='__main__':
+    
+    create_all_tables()
+
+    app.run(debug = True, port = 5000)
