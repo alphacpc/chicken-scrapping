@@ -2,3 +2,6 @@ chicken
 script-node/node_modules
 script-node/node_modules/
 .vscode
+script-python/__pycache__/
+script-python/config.py
+data

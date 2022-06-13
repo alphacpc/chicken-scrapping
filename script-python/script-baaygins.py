@@ -43,7 +43,7 @@ else:
 
 
 
-with open('../data/data-script-py.csv', "w") as file:
+with open('../data/data-baaygins.csv', "w") as file:
 
     donne = csv.DictWriter(file, list(data[0].keys()))
     donne.writeheader()

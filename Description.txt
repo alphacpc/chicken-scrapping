@@ -8,7 +8,8 @@
 #2 -- Sites à scrapper : [ 
         "https://guinarshop.com/shop/", 
         "https://baayguins.com/product-category/poulets-frais/", 
-        "https://www.auchan.fr/boucherie-volaille-poissonnerie/volaille-lapin/poulet/ca-n020201"
+        "https://www.auchan.fr/boucherie-volaille-poissonnerie/volaille-lapin/poulet/ca-n020201",
+        "https://www.auchan.fr/boucherie-volaille-poissonnerie/volaille-lapin/poulet/poulets-entiers/ca-n02020101"
     ]
 
 #3 -- Vérifier si les sites acceptent le Web_Scrapping

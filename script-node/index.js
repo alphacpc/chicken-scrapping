@@ -6,7 +6,7 @@ const csv = require("csv-writer")
 function create_csv(data){
     let createCsvWriter = csv.createObjectCsvWriter
     let csvWriter = createCsvWriter({
-        path : "../data/data-script-js.csv",
+        path : "../data/data-guinarshop.csv",
         header : [
             {id: 'nom', title: 'nom'},
             {id: 'prix', title: 'prix'},
