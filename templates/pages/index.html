@@ -17,6 +17,7 @@
                         <button class="btn btn-auchan">Auchan</button>
                         <button class="btn btn-baayguins">BaayGuins</button>
                         <button class="btn btn-guinarshop">Guinarshop</button>
+                        <button class="btn btn-all">Tout</button>
                     </div>
 
                     <div class="divLoader">
@@ -52,17 +53,36 @@
                     </thead>
 
                     <tbody>
-                        {% for i in range(10) %}
+                        <!-- {% if data %}
+                            {% for product in data %}
+                                <tr>
+                                    <td class="trImg">
+                                        <img src="{{ product.image_info }}" alt="product">
+                                    </td>
+                                    
+                                    {% if product.name_info|length > 25  %}
+                                    
+                                        <td>{{ (product.name_info[:25] + '...') }}</td>
+
+                                    {% else %}
+                                        
+                                        <td>{{ product.name_info }}</td>
+                                    
+                                    {% endif %}
+
+                                    <td><strong>{{ product.prix_info }}</strong> fcfa</td>
+                                    <td>{{ product.poids_info }}</td>
+                                    <td>{{ websites.query.get(product.id_website_info).name_website }}</td>
+                                </tr>
+                            {% endfor %}
+
+                        {% else %}
+                            
                             <tr>
-                                <td class="trImg">
-                                    <img src="{{url_for('static', filename='images/auchan.jpg')}}" alt="product">
-                                </td>
-                                <td>Mafe mafe mafe mafe mafe</td>
-                                <td><strong>Mafe</strong> fcfa</td>
-                                <td>Mafe</td>
-                                <td>auchan.fr</td>
+                                <p>Aucun product pour le moment !</p>
                             </tr>
-                        {% endfor %}
+
+                        {% endif %} -->
                     </tbody>
                 </table>
             </div>

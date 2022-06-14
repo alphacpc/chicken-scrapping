@@ -1,14 +1,22 @@
 import os
 import csv
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template
 from config.index import config
 from models.index import create_all_tables
 from models.index import Websites, Informations
 
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+from flask_cors import CORS
+
+
+
 # app = config()[0]
 app = Flask(__name__)
-
-db = config()[1]
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://groupe3:passer123@localhost/chickens'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+CORS(app)
+db = SQLAlchemy(app)
 
 
 def reader_files(pathname):
@@ -69,10 +77,81 @@ def reader_files(pathname):
 
 @app.route('/', methods=["GET"])
 def home():
-    return render_template('pages/index.html')
+    
+    data = Informations.query.all()    
+
+    return render_template('pages/index.html', data = data, websites = Websites)
 
 
 
+@app.route('/api/data')
+def get_data():
+    data = Informations.query.all()
+    products = []
+
+    for product in data:
+
+        products.append({
+            'nom' : product.name_info,
+            'prix' : product.prix_info,
+            'poids' : product.poids_info,
+            'image' : product.image_info,
+            'origine' : Websites.query.get(product.id_website_info).name_website
+        })
+
+    return jsonify(products)
+
+@app.route('/api/data/auchan')
+def get_data_auchan():
+    data = Informations.query.filter_by(id_website_info = 2).all()
+    products = []
+
+    for product in data:
+
+        products.append({
+            'nom' : product.name_info,
+            'prix' : product.prix_info,
+            'poids' : product.poids_info,
+            'image' : product.image_info,
+            'origine' : Websites.query.get(product.id_website_info).name_website
+        })
+
+    return jsonify(products)
+
+
+@app.route('/api/data/baayguins')
+def get_data_baayguins():
+    data = Informations.query.filter_by(id_website_info = 1).all()
+    products = []
+
+    for product in data:
+
+        products.append({
+            'nom' : product.name_info,
+            'prix' : product.prix_info,
+            'poids' : product.poids_info,
+            'image' : product.image_info,
+            'origine' : Websites.query.get(product.id_website_info).name_website
+        })
+
+    return jsonify(products)
+
+@app.route('/api/data/guinarshop')
+def get_data_guinarshop():
+    data = Informations.query.filter_by(id_website_info = 3).all()
+    products = []
+
+    for product in data:
+
+        products.append({
+            'nom' : product.name_info,
+            'prix' : product.prix_info,
+            'poids' : product.poids_info,
+            'image' : product.image_info,
+            'origine' : Websites.query.get(product.id_website_info).name_website
+        })
+
+    return jsonify(products)
 
 
 if __name__=='__main__':
