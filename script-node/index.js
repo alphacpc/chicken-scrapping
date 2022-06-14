@@ -36,21 +36,35 @@ async function getData(){
         items.forEach((item) => {
 
             let tabword = item.querySelector('h2').innerText.split(' ')
+
+            // Traitement du prix
+            let prix = item.querySelector('.woocommerce-Price-amount.amount bdi').innerText.replaceAll(/\s/g,'')
+            prix = prix.split("CFA")[0]
+            prix = Number(prix)
+
+            // Traitement sur le poids
+            let poids = tabword[tabword.length -1 ].includes('kg') ? tabword[tabword.length -1 ] : null
             
-            results.push({
-                'nom' : item.querySelector('h2').innerText,
-                'prix' : item.querySelector('.woocommerce-Price-amount.amount bdi').innerText,
-                'poids' : tabword[tabword.length -1 ].includes('kg') ? tabword[tabword.length -1 ] : null,
-                'image': item.querySelector('img').src,
-                'site' : window.location.hostname
-            })
+            if(tabword[tabword.length -1 ].includes('kg')){
+                poids = poids.replace(',','.').split('kg')[0]
+                poids = parseFloat(poids)
+
+                results.push({
+                    'nom' : item.querySelector('h2').innerText,
+                    'prix' : prix,
+                    'poids' : poids,
+                    'image': item.querySelector('img').src,
+                    'site' : window.location.hostname
+                })
+            }
+            
+            
 
         })
 
         return results
     })
 
-    console.log(data)
     create_csv(data)
     
     browser.close()

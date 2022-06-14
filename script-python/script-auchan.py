@@ -24,7 +24,7 @@ sleep(1)
 driver.get("https://www.auchan.fr/boucherie-volaille-poissonnerie/volaille-lapin/poulet/poulets-entiers/ca-n02020101")
 
 #Stopper le programme pendant 2s
-sleep(2)
+sleep(3)
 
 #Utilisation de BeautifulSoup
 page_source = driver.page_source
@@ -37,25 +37,44 @@ for product in soup.find_all('article', class_="list__item"):
 
         dict_data = {}
 
+        #Traitement du prix
         prix = product.find('div', class_='product-price bolder text-dark-color').getText()
         prix = prix.split('€')[0].replace(',', '.')
         prix = float(prix) * 642.33 # Le 13juin 2022 1£ => 642.33 FCFA (google)
 
+        #Traitement du poids
+        poids = product.find("div", class_="product-thumbnail__attributes").find('span').getText()
+        poids = poids.lower().replace(',','.')
+
+ 
+        #La conversion en Kg et le split 
+        if("kg" in poids) :
+            poids = poids.split('kg')[0]
+        
+        else :
+            poids = poids.split('g')[0]
+            poids = float(poids) * 0.001
+        
+
 
         dict_data['nom'] = product.find('p', class_="product-thumbnail__description").getText().replace('\n','')
         dict_data['prix'] = round(prix)
-        dict_data['poids'] = product.find("div", class_="product-thumbnail__attributes").find('span').getText()
+        dict_data['poids'] = poids
         dict_data['image'] = product.find('source').get('srcset').split(' ')[0]
         dict_data['site'] =  'auchan.fr'
 
         data.append(dict_data)
 
+
     except:
+
         pass
 
 #Permet le Navigateur apres récupération des données
 driver.close()
 
+#Stopper le programme pendant 1s
+sleep(1)
 
 with open('../data/data-auchan.csv', "w") as file:
 

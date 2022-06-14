@@ -1,12 +1,11 @@
 from bs4 import BeautifulSoup
-from pprint import pprint
-
 import requests
 import csv
 
+
 url = 'https://baayguins.com/product-category/poulets-frais/'
 response = requests.get(url)
-print(response.status_code)
+
 
 if response.status_code == 200 :
 
@@ -22,29 +21,43 @@ if response.status_code == 200 :
         dict_data = {}
 
         title = product.find('h2').getText()
+
+        #Traitement sur le prix
         prix = product.find('span', class_='price').find('bdi').getText()
+        prix = prix.replace(u'\xa0', u' ')
+        prix = prix.split(' ')[0].replace('.','')
 
-        print(prix)
-        print(prix.split('x'))
+        #Traitement sur le poids
+        poids = title.split('–')[-1].replace(' ','').replace(',', '.').lower()
+        poids = poids.split('kg')[0]
 
-        dict_data['nom'] = title
-        dict_data['prix'] = prix.replace(u'\xa0', u' ')
-        dict_data['poids'] = title.split('–')[-1]
-        dict_data['image'] = product.find('img', class_='attachment-woocommerce_thumbnail').get('src')
-        dict_data['site'] =  'baayguins.com'
+        try:    
+            poids = float(poids)
+            prix = int(prix)
 
-        pprint(dict_data)
+            dict_data['nom'] = product.find('h2').getText()
+            dict_data['prix'] = prix
+            dict_data['poids'] = poids
+            dict_data['image'] = product.find('img', class_='attachment-woocommerce_thumbnail').get('src')
+            dict_data['site'] =  'baayguins.com'
 
-        data.append(dict_data)
+
+            data.append(dict_data)
+
+        except ValueError:
+            
+            pass
+
+    #Ecriture du fichier csv
+    with open('../data/data-baaygins.csv', "w") as file:
+
+        donne = csv.DictWriter(file, list(data[0].keys()))
+        donne.writeheader()
+        donne.writerows(data)
+
 
 else:
 
-    print("Adresse Url incorrect !")
+    print("Url incorrect !")
 
 
-
-with open('../data/data-baaygins.csv', "w") as file:
-
-    donne = csv.DictWriter(file, list(data[0].keys()))
-    donne.writeheader()
-    donne.writerows(data)

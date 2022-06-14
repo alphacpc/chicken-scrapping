@@ -1,12 +1,22 @@
-from config.index import db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+import sys
+sys.path.append("..")
+from config.index import config
+
+
+
+db = config()[1]
+
 
 ####TAB WEBSITES
 class Websites(db.Model):
     __tablename__ = 'websites'
     id_website = db.Column(db.Integer, primary_key = True)
-    name_website = db.Column(db.String(150), nullable=False)
+    name_website = db.Column(db.String(150), nullable = False)
 
-    informations = db.relationship('informations', backref ='websites')
+    informations = db.relationship('Informations', backref ='websites')
 
     def __repr__(self):
         return '<Albums %r>' % self.name_website
