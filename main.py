@@ -121,7 +121,7 @@ def get_data_auchan():
 
 @app.route('/api/data/baayguins')
 def get_data_baayguins():
-    data = Informations.query.filter_by(id_website_info = 1).all()
+    data = Informations.query.filter_by(id_website_info = 3).all()
     products = []
 
     for product in data:
@@ -138,7 +138,7 @@ def get_data_baayguins():
 
 @app.route('/api/data/guinarshop')
 def get_data_guinarshop():
-    data = Informations.query.filter_by(id_website_info = 3).all()
+    data = Informations.query.filter_by(id_website_info = 1).all()
     products = []
 
     for product in data:

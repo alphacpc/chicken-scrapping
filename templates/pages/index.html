@@ -6,8 +6,10 @@
 
 {% block content %}
 
+    <div class="divMessage"></div>
 
     <div class="divContainer">
+        
         <div class="divTabs">
 
             <div class="divTabItem">
@@ -22,30 +24,30 @@
 
                     <div class="divLoader">
                         <input type="number" min="1" max="20" placeholder="Nombre">
-                        <button>Charger</button>
+                        <button>Réduire</button>
                     </div>
                 </div>
 
                 <table aria-describedby="big-table">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>
+                            <!-- <th>Image</th> -->
+                            <th class="tri" column-name="nom" order="desc">
                                 Nom du produit
                                 <span class="spanTri byName">
-                                    <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/>
+                                    <!-- <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/> -->
                                 </span>
                             </th>
-                            <th>
+                            <th class="tri" column-name="prix" order="desc">
                                 Prix
                                 <span class="spanTri byPrice">
-                                    <img src="{{url_for('static', filename='images/arrow-top.svg')}}" width="15" height="15" alt="product"/>
+                                    <!-- <img src="{{url_for('static', filename='images/arrow-top.svg')}}" width="15" height="15" alt="product"/> -->
                                 </span>
                             </th>
-                            <th>
+                            <th class="tri" column-name="poids" order="desc">
                                 Poids (kg)
                                 <span class="spanTri byPoids">
-                                    <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/>  
+                                    <!-- <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/>   -->
                                 </span>
                             </th>
                             <th>Origine</th>

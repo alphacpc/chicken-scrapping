@@ -11,6 +11,7 @@
     width: 100%;
     min-height: 100vh;
     display: flex;
+    position: relative;
 }
 
 .divContainer .divTabs,
@@ -43,7 +44,7 @@ table thead th{
 }
 
 .divFilter .btn{
-    background: yellow;
+    background: #1F4690;
     border: none;
     padding: 10px;
     font-size: 15px;
@@ -107,6 +108,14 @@ table thead th{
     letter-spacing: 1px;
 }
 
+.divTabItem thead tr th[order= 'desc'] span.spanTri:after{
+    content: '\25be'
+}
+
+.divTabItem thead tr th[order= 'asc'] span.spanTri:after{
+    content: '\25b4'
+}
+
 .divTabItem tbody tr td{
     padding: 10px 0;
 }
@@ -131,4 +140,47 @@ tbody tr td img{
 .divContainer .divGraphInfo{
     background: turquoise;
     padding-top: 40px;
+}
+
+
+
+
+
+/* ****************** */
+/* ** div Message ** */
+/* **************** */
+.divMessage{
+    background: #F32424;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 16%;
+    overflow: hidden;
+    border-radius: 4px 0 0 4px;
+    display: none;
+    transition: all ease .3s;
+    z-index: 4;
+}
+.divMessage.show{
+    display: block;
+    animation: show_slide 2s ease forwards;
+}
+
+
+@keyframes show_slide{
+    0%{
+        transform: translateX(100%);
+    }
+    50%{
+        transform: translateX(-10px);
+    }
+}
+
+
+.divMessage p{
+    font-family: sans-serif;
+    padding: 10px 5px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-align: center;
 }

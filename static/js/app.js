@@ -1,12 +1,26 @@
+/************************************************************ */
+/***************** DECLARATION DES VARIABLES *************** */
+/********************************************************** */
 let tbody =  document.querySelector('.divTabItem tbody')
 let btnAuchan = document.querySelector('.btn-auchan')
 let btnBaayguins = document.querySelector('.btn-baayguins')
 let btnGuinarshop = document.querySelector('.btn-guinarshop')
 let btnAll = document.querySelector('.btn-all')
+let trs = document.querySelectorAll('th.tri')
+let inputLoad = document.querySelector('.divLoader input')
+let btnLoad = document.querySelector('.divLoader button')
+let divMessage = document.querySelector('.divMessage')
 
+
+
+
+/************************************************************** */
+/******** POUR GENERER DE TR EN FONCTION DES DONNES ********** */
+/************************************************************ */
 let generate_tr = (data) => {
 
     tbody.innerHTML = ''
+    localStorage.setItem('data', JSON.stringify(data))
 
     for(let product of data){
         let tr = document.createElement('tr')
@@ -35,7 +49,7 @@ let generate_tr = (data) => {
 
         td_origine.innerText = product.origine
 
-        tr.appendChild(td_image)
+        // tr.appendChild(td_image)
         tr.appendChild(td_title)
         tr.appendChild(td_price)
         tr.appendChild(td_poids)
@@ -45,6 +59,9 @@ let generate_tr = (data) => {
 
 }
 
+/************************************************************************* */
+/************ LA FONCTION QUI RECUPERE TOUT LES PRODUITS **************** */
+/*********************************************************************** */
 let getter_data = async () =>{
 
     let response = await fetch('http://localhost:5000/api/data')
@@ -54,6 +71,10 @@ let getter_data = async () =>{
 
 }
 
+
+/************************************************************ */
+/*************** AU CLICK FAIRE DES ACTIONS **************** */
+/********************************************************** */
 btnAuchan.addEventListener('click', async() => {
 
     let response = await fetch('/api/data/auchan',)
@@ -87,7 +108,91 @@ btnAll.addEventListener('click', async() => {
     let data = await response.json()
 
     generate_tr(data)
+
+    
 })
+
+
+/************************************************************ */
+/************** TRIER EN FONCTION DES COLONNES ************* */
+/********************************************************** */
+trs.forEach((tr) => {
+
+
+
+    tr.addEventListener('click', (e) => {
+        let data = JSON.parse(localStorage.getItem('data'))
+        console.log(data)
+
+        let balise = e.target
+        let columnName = balise.getAttribute('column-name')
+        let order = balise.getAttribute('order')
+
+        if( order == 'desc'){
+            balise.setAttribute('order', 'asc')
+            data = data.sort( (a,b) => {
+                return a[columnName] > b[columnName] ? 1 : -1
+            })
+        }else{
+            balise.setAttribute('order', 'desc')
+
+            data = data.sort( (a,b) => {
+                return a[columnName] < b[columnName] ? 1 : -1
+            })
+        }
+
+        generate_tr(data)
+
+    })
+
+})
+
+
+/************************************************************ */
+/****************** AFFICHER QUELQUES PRODUTS ************** */
+/********************************************************** */
+function show_error(message){
+    let p = document.createElement('p')
+        p.innerText = message
+        divMessage.appendChild(p)
+        divMessage.classList.add('show')
+
+        setTimeout(() => {
+            p.innerText = ''
+            p.remove()
+            divMessage.classList.remove('show')
+        }, 3000);
+}
+
+
+btnLoad.addEventListener('click', () => {
+    console.log("hello word")
+    console.log("Valeur de input", inputLoad.value)
+    let data = JSON.parse(localStorage.getItem('data'))
+
+
+    if( inputLoad.value){
+        let valeur = inputLoad.value
+
+
+        if( valeur > data.length){
+            show_error(`Veuillez donner un nombre compris entre 1 à ${data.length }`)
+            inputLoad.value = ''
+        }
+        
+        else{
+
+            generate_tr( data.slice(0, valeur) )
+            inputLoad.value = ''
+        }
+    
+    }
+    
+    else{
+        show_error('Veuillez entrer un nombre positif !')
+    }
+})
+
 
 
 getter_data()
