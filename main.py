@@ -5,7 +5,9 @@ from config.index import config
 from models.index import create_all_tables
 from models.index import Websites, Informations
 
-app = config()[0]
+# app = config()[0]
+app = Flask(__name__)
+
 db = config()[1]
 
 

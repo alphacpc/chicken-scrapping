@@ -1,0 +1,134 @@
+*{
+    padding : 0;
+    margin : 0;
+    font-family: sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+.divContainer{
+    background: #c2c2c2;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+
+.divContainer .divTabs,
+.divContainer .divGraphInfo{
+    flex: 1;
+    padding: 0 20px;
+}
+
+.divTabItem table thead{
+    background: pink;
+}
+table thead th{
+    margin-right: 0;
+    border-right: 0;
+}
+
+
+/* ********************* */
+/* ****   divTabs   *** */
+/* ******************* */
+.divTabItem{
+    padding-top: 100px;
+}
+
+.divFilter{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    margin-bottom: 20px;
+}
+
+.divFilter .btn{
+    background: yellow;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all ease .3s;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.divFilter .btn.btn-auchan{
+    background: #B22727;
+}
+.divFilter .btn.btn-baayguins{
+    background: #990000;
+}
+.divFilter .btn.btn-guinarshop{
+    background: #F32424;
+}
+
+
+.divLoader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 190px;
+}
+.divLoader input,
+.divLoader button{
+    padding: 10px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border: none;
+    outline: 0;
+}
+
+.divLoader input{
+    border-radius: 20px 0 0 20px;
+    padding-left: 20px;
+    width: 100%;
+
+}
+
+.divLoader button{
+    border-radius: 0px 20px 20px 0px;
+    cursor: pointer;
+    background: #1F4690;
+    color: #fff;
+}
+
+
+.divTabItem table{
+    width: 100%;
+}
+
+
+.divTabItem thead tr th{
+    padding: 20px 0;
+    font-family: 20px;
+    letter-spacing: 1px;
+}
+
+.divTabItem tbody tr td{
+    padding: 10px 0;
+}
+
+.divTabItem tbody tr td{
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+
+
+tbody tr td img{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+/* ***************** */
+/* ** div graphe ** */
+/* *************** */
+.divContainer .divGraphInfo{
+    background: turquoise;
+    padding-top: 40px;
+}

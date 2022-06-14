@@ -13,4 +13,4 @@ def config():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db = SQLAlchemy(app)
 
-    return app, db
+    return (app, db)

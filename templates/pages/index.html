@@ -5,5 +5,73 @@
 {% endblock%}
 
 {% block content %}
-    <h1>Hellon world !</h1>
+
+
+    <div class="divContainer">
+        <div class="divTabs">
+
+            <div class="divTabItem">
+               
+                <div class="divFilter">
+                    <div class="divOrigines">
+                        <button class="btn btn-auchan">Auchan</button>
+                        <button class="btn btn-baayguins">BaayGuins</button>
+                        <button class="btn btn-guinarshop">Guinarshop</button>
+                    </div>
+
+                    <div class="divLoader">
+                        <input type="number" min="1" max="20" placeholder="Nombre">
+                        <button>Charger</button>
+                    </div>
+                </div>
+
+                <table aria-describedby="big-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>
+                                Nom du produit
+                                <span class="spanTri byName">
+                                    <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/>
+                                </span>
+                            </th>
+                            <th>
+                                Prix
+                                <span class="spanTri byPrice">
+                                    <img src="{{url_for('static', filename='images/arrow-top.svg')}}" width="15" height="15" alt="product"/>
+                                </span>
+                            </th>
+                            <th>
+                                Poids (kg)
+                                <span class="spanTri byPoids">
+                                    <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/>  
+                                </span>
+                            </th>
+                            <th>Origine</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for i in range(10) %}
+                            <tr>
+                                <td class="trImg">
+                                    <img src="{{url_for('static', filename='images/auchan.jpg')}}" alt="product">
+                                </td>
+                                <td>Mafe mafe mafe mafe mafe</td>
+                                <td><strong>Mafe</strong> fcfa</td>
+                                <td>Mafe</td>
+                                <td>auchan.fr</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="divGraphInfo">
+            <h2>Graphe</h2>
+        </div>
+    </div>
+
+
 {% endblock %}
