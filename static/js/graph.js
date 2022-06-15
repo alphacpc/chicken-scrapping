@@ -1,10 +1,9 @@
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 100, bottom: 30, left: 60},
+let margin = {top: 10, right: 100, bottom: 30, left: 60},
     width = 980 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
-var svg = d3.select("#divGraph")
+
+let svg = d3.select("#divGraph")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -12,15 +11,15 @@ var svg = d3.select("#divGraph")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
+
 d3.json("http://localhost:5000/api/data/viz", function(data) {
 
     console.log(data)
 
-    var allGroup = ["guinarshop.com", "auchan.fr", "baayguins.com"]
+    let allGroup = ["guinarshop.com", "auchan.fr", "baayguins.com"]
 
-    // Reformat the data: we need an array of arrays of {x, y} tuples
-    var dataReady = allGroup.map( (grpName) => { // .map allows to do something for each element of the list
+    // Change format data
+    let dataReady = allGroup.map( (grpName) => {
       return {
         name: grpName,
         values: data.filter(d => {
@@ -31,10 +30,8 @@ d3.json("http://localhost:5000/api/data/viz", function(data) {
       };
     });
 
-    console.log("Valeur dataReady real data :",dataReady)
 
-    // A color scale: one color for each group
-    var myColor = d3.scaleOrdinal()
+    let myColor = d3.scaleOrdinal()
     .domain(allGroup)
     .range(d3.schemeSet2);
 
@@ -48,7 +45,7 @@ d3.json("http://localhost:5000/api/data/viz", function(data) {
         .call(d3.axisBottom(x));
   
     // axis Y
-      var y = d3.scaleLinear()
+      let y = d3.scaleLinear()
         .domain( [0, 12000])
         .range([ height, 0 ]);
       svg.append("g")
@@ -56,8 +53,8 @@ d3.json("http://localhost:5000/api/data/viz", function(data) {
 
     
     
-    // Add the lines
-        var line = d3.line()
+    // Add lines
+      let line = d3.line()
         .x((d) => x(+d.poids) )
         .y((d) => y(+d.prix) )
       svg.selectAll("myLines")
@@ -71,10 +68,8 @@ d3.json("http://localhost:5000/api/data/viz", function(data) {
           .style("fill", "none")
     
       
-          // Add the points
-        svg
-        // First we need to enter in a group
-        .selectAll("myDots")
+      // Add points
+      svg.selectAll("blockPoints")
         .data(dataReady)
         .enter()
           .append('g')
@@ -84,24 +79,23 @@ d3.json("http://localhost:5000/api/data/viz", function(data) {
             return myColor(d.name) 
           })
           .attr("class", (d) => d.name )
-        // Second we need to enter in the 'values' part of this group
-        .selectAll("myPoints")
-        .data(function(d){ return d.values })
-        .enter()
-        .append("circle")
-          .attr("cx", (d) => x(d.poids)  )
-          .attr("cy", (d) => y(d.prix)  )
-          .attr("r", 5)
-          .attr("stroke", "white")
+
+          .selectAll("points")
+          .data(function(d){ return d.values })
+          .enter()
+          .append("circle")
+            .attr("cx", (d) => x(d.poids)  )
+            .attr("cy", (d) => y(d.prix)  )
+            .attr("r", 5)
+            .attr("stroke", "white")
         
 
 
 
 
 
-    // Add a legend (interactive)
-    svg
-      .selectAll("myLegend")
+    // Add Legend 
+    svg.selectAll("myLegend")
       .data(dataReady)
       .enter()
         .append('g')

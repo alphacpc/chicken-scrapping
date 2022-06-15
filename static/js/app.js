@@ -49,7 +49,7 @@ let generate_tr = (data) => {
 
         td_origine.innerText = product.origine
 
-        // tr.appendChild(td_image)
+        tr.appendChild(td_image)
         tr.appendChild(td_title)
         tr.appendChild(td_price)
         tr.appendChild(td_poids)
