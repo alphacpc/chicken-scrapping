@@ -35,63 +35,55 @@
                             <th class="tri" column-name="nom" order="desc">
                                 Nom du produit
                                 <span class="spanTri byName">
-                                    <!-- <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/> -->
                                 </span>
                             </th>
                             <th class="tri" column-name="prix" order="desc">
                                 Prix
                                 <span class="spanTri byPrice">
-                                    <!-- <img src="{{url_for('static', filename='images/arrow-top.svg')}}" width="15" height="15" alt="product"/> -->
                                 </span>
                             </th>
                             <th class="tri" column-name="poids" order="desc">
                                 Poids (kg)
                                 <span class="spanTri byPoids">
-                                    <!-- <img src="{{url_for('static', filename='images/arrow-bottom.svg')}}" width="15" height="15" alt="product"/>   -->
                                 </span>
                             </th>
                             <th>Origine</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <!-- {% if data %}
-                            {% for product in data %}
-                                <tr>
-                                    <td class="trImg">
-                                        <img src="{{ product.image_info }}" alt="product">
-                                    </td>
-                                    
-                                    {% if product.name_info|length > 25  %}
-                                    
-                                        <td>{{ (product.name_info[:25] + '...') }}</td>
-
-                                    {% else %}
-                                        
-                                        <td>{{ product.name_info }}</td>
-                                    
-                                    {% endif %}
-
-                                    <td><strong>{{ product.prix_info }}</strong> fcfa</td>
-                                    <td>{{ product.poids_info }}</td>
-                                    <td>{{ websites.query.get(product.id_website_info).name_website }}</td>
-                                </tr>
-                            {% endfor %}
-
-                        {% else %}
-                            
-                            <tr>
-                                <p>Aucun product pour le moment !</p>
-                            </tr>
-
-                        {% endif %} -->
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
 
         <div class="divGraphInfo">
-            <h2>Graphe</h2>
+            <h2>Représentation graphique</h2>
+
+            <div id="my_dataviz"></div>
+
+
+            <div class="divProductMeti">
+                {% for product in results %}
+                    <div class="divProductMetiItem">
+                        <div class="divImageMeti">
+                            <img src="{{product.image}}" alt="{{product.nom}}">
+                        </div>
+                        <div>
+                            <h4>{{product.nom }} ({{product.origine}})</h4>
+                            <div class="divPrixPoids">
+                                <p>
+                                    <span class="spanLabel">Prix</span>
+                                    <span class="spanPrice">{{product.prix}}</span>
+                                </p>
+                                <p>
+                                    <span class="spanLabel">Poids</span>
+                                    <span class="spanPoids">{{product.poids}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

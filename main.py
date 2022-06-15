@@ -1,5 +1,7 @@
 import os
 import csv
+from pprint import pprint
+from unittest import result
 from flask import Flask, jsonify, render_template
 from config.index import config
 from models.index import create_all_tables
@@ -75,12 +77,52 @@ def reader_files(pathname):
 
 
 
+
+# @app.route('/api/data/meti')
+def get_meti_products():
+
+    products = []
+    results = []
+
+    id_auchan = Websites.query.filter_by(name_website = "auchan.fr").first().id_website
+    id_baayguins = Websites.query.filter_by(name_website = "baayguins.com").first().id_website
+    id_guinarshop = Websites.query.filter_by(name_website = "guinarshop.com").first().id_website
+
+    product_auchan = Informations.query.filter_by(id_website_info = id_auchan).order_by(Informations.prix_info.desc()).first()
+    product_baayguins = Informations.query.filter_by(id_website_info = id_baayguins).order_by(Informations.prix_info.desc()).first()
+    product_guinarshop = Informations.query.filter_by(id_website_info = id_guinarshop).order_by(Informations.prix_info.desc()).first()
+
+    products.append(product_auchan)
+    products.append(product_baayguins)
+    products.append(product_guinarshop)
+
+    for product in products:
+        
+        results.append({
+            'nom' : product.name_info,
+            'prix' : product.prix_info,
+            'poids' : product.poids_info,
+            'image' : product.image_info,
+            'origine' : Websites.query.get(product.id_website_info).name_website
+        })
+
+
+    return results
+
+
+
+
+
+
+
+
 @app.route('/', methods=["GET"])
 def home():
     
-    data = Informations.query.all()    
+    data = Informations.query.all()
+    results = get_meti_products()
 
-    return render_template('pages/index.html', data = data, websites = Websites)
+    return render_template('pages/index.html', data = data, websites = Websites, results = results)
 
 
 
@@ -103,7 +145,8 @@ def get_data():
 
 @app.route('/api/data/auchan')
 def get_data_auchan():
-    data = Informations.query.filter_by(id_website_info = 2).all()
+    id_auchan = Websites.query.filter_by(name_website = "auchan.fr").first().id_website
+    data = Informations.query.filter_by(id_website_info = id_auchan).all()
     products = []
 
     for product in data:
@@ -121,7 +164,8 @@ def get_data_auchan():
 
 @app.route('/api/data/baayguins')
 def get_data_baayguins():
-    data = Informations.query.filter_by(id_website_info = 3).all()
+    id_baayguins = Websites.query.filter_by(name_website = "baayguins.com").first().id_website
+    data = Informations.query.filter_by(id_website_info = id_baayguins).all()
     products = []
 
     for product in data:
@@ -135,10 +179,13 @@ def get_data_baayguins():
         })
 
     return jsonify(products)
+
+
 
 @app.route('/api/data/guinarshop')
 def get_data_guinarshop():
-    data = Informations.query.filter_by(id_website_info = 1).all()
+    id_guinarshop = Websites.query.filter_by(name_website = "guinarshop.com").first().id_website
+    data = Informations.query.filter_by(id_website_info = id_guinarshop).all()
     products = []
 
     for product in data:
@@ -152,6 +199,13 @@ def get_data_guinarshop():
         })
 
     return jsonify(products)
+
+
+
+
+
+
+
 
 
 if __name__=='__main__':

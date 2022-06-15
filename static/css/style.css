@@ -6,8 +6,53 @@
     list-style: none;
 }
 
+
+/* ****************** */
+/* ** div Message ** */
+/* **************** */
+.divMessage{
+    background: #F32424;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 16%;
+    overflow: hidden;
+    border-radius: 4px 0 0 4px;
+    display: none;
+    transition: all ease .3s;
+    z-index: 4;
+}
+.divMessage.show{
+    display: block;
+    animation: show_slide 2s ease forwards;
+}
+
+
+@keyframes show_slide{
+    0%{
+        transform: translateX(100%);
+    }
+    50%{
+        transform: translateX(-10px);
+    }
+}
+
+
+.divMessage p{
+    font-family: sans-serif;
+    padding: 10px 5px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+
+
+
+/* ************************* */
+
 .divContainer{
-    background: #c2c2c2;
+    background: #f2f2f2;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -21,11 +66,12 @@
 }
 
 .divTabItem table thead{
-    background: pink;
+    background: #1F4690;
 }
 table thead th{
     margin-right: 0;
     border-right: 0;
+    color: #FFFFFF;
 }
 
 
@@ -40,7 +86,7 @@ table thead th{
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .divFilter .btn{
@@ -138,49 +184,95 @@ tbody tr td img{
 /* ** div graphe ** */
 /* *************** */
 .divContainer .divGraphInfo{
-    background: turquoise;
-    padding-top: 40px;
+    /* background: turquoise; */
+    padding-top: 20px;
+}
+
+
+.divGraphInfo h2{
+    font-size: 35px;
 }
 
 
 
 
 
-/* ****************** */
-/* ** div Message ** */
-/* **************** */
-.divMessage{
-    background: #F32424;
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 16%;
-    overflow: hidden;
-    border-radius: 4px 0 0 4px;
-    display: none;
-    transition: all ease .3s;
-    z-index: 4;
-}
-.divMessage.show{
-    display: block;
-    animation: show_slide 2s ease forwards;
-}
 
 
-@keyframes show_slide{
-    0%{
-        transform: translateX(100%);
-    }
-    50%{
-        transform: translateX(-10px);
-    }
-}
 
 
-.divMessage p{
-    font-family: sans-serif;
-    padding: 10px 5px;
-    color: #ffffff;
-    letter-spacing: 1px;
+
+/* *************** */
+/* ** div Meti ** */
+/* ************* */
+.divProductMeti{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     text-align: center;
+}
+
+.divProductMetiItem{
+    width: 25%;
+    letter-spacing: 1px;
+    background: #FFFFFF;
+    cursor: pointer;
+    transition: all ease .3s;
+}
+
+.divProductMetiItem:hover{
+    transform: rotate(10deg);
+}
+
+.divProductMetiItem .divImageMeti{
+    width: 100%;
+    height: 160px;
+}
+
+.divProductMetiItem .divImageMeti img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.divProductMetiItem h4{
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divProductMetiItem .divPrixPoids,
+.divProductMetiItem .divPrixPoids p{
+    display: flex;
+}
+
+.divProductMetiItem .divPrixPoids{
+    /* background-color: #990000; */
+    justify-content: space-around;
+    margin-top: 5px;
+}
+
+.divProductMetiItem .divPrixPoids p{
+    flex-direction: column;
+}
+
+.divProductMetiItem .divPrixPoids p span.spanLabel{
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: orangered;
+}
+
+.divProductMetiItem .divPrixPoids p span:not(.spanLabel){
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.divProductMetiItem .divPrixPoids p span.spanPrice:after{
+    content : ' fcfa'
+}
+
+.divProductMetiItem .divPrixPoids p span.spanPoids:after{
+    content : ' kg'
 }
