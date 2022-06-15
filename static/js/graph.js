@@ -46,7 +46,7 @@ d3.json("http://localhost:5000/api/data/viz", function(data) {
   
     // axis Y
       let y = d3.scaleLinear()
-        .domain( [0, 12000])
+        .domain( [2000, 12000])
         .range([ height, 0 ]);
       svg.append("g")
         .call(d3.axisLeft(y));
