@@ -202,6 +202,22 @@ def get_data_guinarshop():
 
 
 
+@app.route('/api/data/viz')
+def get_data_viz():
+
+    products = []
+    data = Informations.query.all()
+
+    for product in data:
+
+        products.append({
+            'prix' : product.prix_info,
+            'poids' : product.poids_info,
+            'origine' : Websites.query.get(product.id_website_info).name_website
+        })
+
+    return jsonify(products)
+
 
 
 

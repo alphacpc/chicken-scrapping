@@ -103,13 +103,13 @@ table thead th{
 }
 
 .divFilter .btn.btn-auchan{
-    background: #B22727;
+    background: #e36e40;
 }
 .divFilter .btn.btn-baayguins{
-    background: #990000;
+    background: #3c548a;
 }
 .divFilter .btn.btn-guinarshop{
-    background: #F32424;
+    background: #0d8f66;
 }
 
 
@@ -210,6 +210,7 @@ tbody tr td img{
     justify-content: space-between;
     flex-wrap: wrap;
     text-align: center;
+    margin-top: 20px;
 }
 
 .divProductMetiItem{
